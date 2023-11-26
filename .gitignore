@@ -1,3 +1,13 @@
+*.csv
+*.txt
+*.profile_default
+*.npy
+*index
+*.faiss
+*.xlsx
+*.bak
+*.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
