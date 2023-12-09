@@ -17,9 +17,10 @@ def load_index_database():
 
 
 def get_search_results(query: str,
-                       database: FAISS):
-    query_extended = '\n'.join([QUERY_PREFIX, query])
-    search_results = database.similarity_search_with_score(query_extended, k=K)
+                       database: FAISS,
+                       k: int = K):
+    query_extended = QUERY_PREFIX + query
+    search_results = database.similarity_search_with_score(query_extended, k=k)
     data_urls = []
     to_log = []
     for result in [parse_search_result(r) for r in search_results]:
@@ -28,8 +29,8 @@ def get_search_results(query: str,
         to_log.extend([index, score])
 
     log_search_result(query_extended, to_log)
-
-    return data_urls
+    data_urls_dict = dict(enumerate(data_urls))
+    return data_urls_dict
 
 
 def log_search_result(query_extended: str,
